@@ -25,7 +25,7 @@ namespace System.Windows.Forms
         /// </remarks>
         public static void ShowContextMenu(this NotifyIcon notifyIcon, ContextMenu contextMenu)
         {
-            var pos = System.Windows.Forms.Cursor.Position;
+            var pos = Cursor.Position;
 
             var window = typeof(NotifyIcon).GetField("_window", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(notifyIcon);
             var windowHandle = (IntPtr)window!.GetType().GetProperty("Handle")!.GetValue(window)!;

@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Reflection;
-using System.Runtime.InteropServices;
+﻿using System.Reflection;
 
 namespace System.Windows.Forms
 {
@@ -13,20 +11,9 @@ namespace System.Windows.Forms
         {
             typeof(Control).GetMethod(nameof(CheckParentingCycle), BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, new object?[] { bottom, toFind });
         }
-
         internal static IntPtr SetUpPalette(IntPtr dc, bool force, bool realizePalette)
         {
             return (IntPtr)typeof(Control).GetMethod(nameof(SetUpPalette), BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, new object?[] { dc, force, realizePalette })!;
-            //IntPtr halftonePalette = Graphics.GetHalftonePalette();
-            
-            //IntPtr result = SafeNativeMethods.SelectPalette(new HandleRef(null, dc), new HandleRef(null, halftonePalette), (force ? 0 : 1));
-
-            //if (result != IntPtr.Zero && realizePalette)
-            //{
-            //    SafeNativeMethods.RealizePalette(new HandleRef(null, dc));
-            //}
-
-            //return result;
         }
     }
 }

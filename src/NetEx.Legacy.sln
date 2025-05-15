@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Windows.Forms.Legacy", "System.Windows.Forms.Legacy\System.Windows.Forms.Legacy.csproj", "{AB1EC6DF-40E0-40FB-8693-0AC0B49F7189}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetEx.Legacy.WinForms", "NetEx.Legacy.WinForms\NetEx.Legacy.WinForms.csproj", "{AB1EC6DF-40E0-40FB-8693-0AC0B49F7189}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
