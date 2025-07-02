@@ -4,7 +4,8 @@
 
 		<!-- Project Settings -->
 		<TargetFrameworks>
-			netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows
+			netcoreapp3.1;
+			net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows
 		</TargetFrameworks>
 		<OutputType>Library</OutputType>
 		<RootNamespace>NetEx.Legacy.WinForms</RootNamespace>
@@ -27,17 +28,17 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 
 		<!-- Metadata -->
-		<Version>9.0.0</Version>
-		<Description>A collection of types and controls that have been removed from .NET.</Description>
+		<Version>3.0.0</Version>
+		<Description>A collection of controls that have been removed from System.Windows.Forms.</Description>
 		<Author>Simon Peckmore</Author>
 		<Copyright>Copyright © Simon Peckmore 2025</Copyright>
 
 		<!-- Package Settings -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>NetEx.Legacy.WinForms</PackageId>
-		<!--<PackageIcon>icon.png</PackageIcon>-->
+		<PackageIcon>icon.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/Peckmore/NetEx.Legacy</PackageProjectUrl>
-		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>Please refer to GitHub for changes.</PackageReleaseNotes>
 		<PackageTags>
 			netex;
@@ -59,10 +60,10 @@
 
 	</PropertyGroup>
 
-	<!-- <ItemGroup> -->
-	<!-- 	<None Include="../../resources/images/icon.png" Pack="true" Visible="false" PackagePath="\" /> -->
-	<!-- 	<None Include="README.md" Pack="true" PackagePath="\" /> -->
-	<!-- </ItemGroup> -->
+	 <ItemGroup> 
+	 	<None Include="../../res/images/icon.png" Pack="true" Visible="false" PackagePath="\" /> 
+	 	<None Include="README.md" Pack="true" PackagePath="\" /> 
+	 </ItemGroup> 
 
 	<ItemGroup>
 		<Compile Remove="System.Windows.Forms\System\Windows\Forms\Excluded\**" />
