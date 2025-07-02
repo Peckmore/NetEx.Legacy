@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "exclude": [
+            "**/*Demo*",
+            "**/*Tests*"
+          ],
+          "files": [
+            "**/*.csproj"
+          ],
+          "src": "../src"
+        }
+      ],
+      "dest": "api",
+      "properties": {
+        "TargetFramework": "net9.0-windows"
+      }
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "index.md"
+        ],
+        "src": "../"
+      },
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ],
+        "src": "../res"
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern",
+      "template"
+    ],
+    "xref": [
+      "https://learn.microsoft.com/en-us/dotnet/.xrefmap.json"
+    ],
+    "globalMetadata": {
+      "_appFaviconPath": "images/logo_docfx.png",
+      "_appLogoPath": "images/logo_docfx.png",
+      "_disableContribution": true,
+      "_disableNextArticle": true,
+      "_enableSearch": true,
+      "pdf": false
+    }
+  }
+}
