@@ -1,0 +1,58 @@
+name: Publish Documentation
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: 9.0.x
+
+jobs:
+
+  Publish:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+    # Checkout the repository
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # Set up .NET environment
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    # Update DocFX tool
+    - name: Update DocFX
+      run: dotnet tool update -g docfx
+
+    # Copy DocFX index
+    - name: Copy DocFX index
+      shell: pwsh
+      run: Copy-Item  -Path .\README.md -Destination .\index.md
+
+    # Generate documentation
+    - name: Generate Documentation
+      run: docfx docfx.json
+      working-directory: docs
+
+    # Upload documentation artifacts
+    - name: Upload Documentation Artifacts
+      id: upload
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: docs/_site/
+
+    # Publish documentation to GitHub Pages
+    - name: Publish to GitHub Pages
+      id: publish
+      uses: actions/deploy-pages@v4

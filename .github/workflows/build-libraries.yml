@@ -1,0 +1,65 @@
+﻿name: Build Libraries
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+  workflow_call:
+  workflow_dispatch:
+  
+env:
+  BUILD_CONFIGURATION: Release
+  DOTNET_VERSION: 9.0.x
+  VERSION_NUMBER: 0
+
+jobs:
+
+  Build:
+    runs-on: windows-latest
+
+    steps:
+    
+    # Checkout the repository
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    
+    # Set up .NET environment
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    # Set version number (for Release)
+    - name: Set Version Number
+      if: github.event_name == 'release'
+      run: |
+        Write-Host "GitHub Ref Name: ${{ github.ref_name }}"
+        $tag = "${{ github.ref_name }}"
+        $version = $tag -replace '^v', ''
+        "VERSION_NUMBER=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        Write-Host "Version set to: $version"
+
+    # Restore dependencies
+    - name: Restore Dependencies
+      run: dotnet restore
+      working-directory: src
+
+    # Build the project
+    - name: Build
+      run: |
+        dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore /p:Version=${{ env.VERSION_NUMBER }}
+      working-directory: src
+
+    # Upload build artifacts
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nupkg-files
+        path: src/**/*.nupkg
