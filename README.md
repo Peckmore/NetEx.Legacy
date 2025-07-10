@@ -16,7 +16,7 @@ As such, **all existing namespaces have been preserved**, meaning that most/all 
 
 The code has been taken from the last available version within the official .NET repositories, and modified only where necessary to make it functional; as such, the majority of the code should be identical to the original code. Any libraries or compatibility shims are within the `Compatibility` folder.
 
-The project is very much a **work-in-progress**, and is currently focused on restoring types and controls that have been removed. In the future the code could be updated to take advantage of newer runtime features, but that isn't on the roadmap at present!
+The project is very much a **work-in-progress** and **perpetual alpha** (at least for the time being), and is currently focused on restoring types and controls that have been removed. In the future the code could be updated to take advantage of newer runtime features, or move out of the `System` namespace, but that isn't on the roadmap at present!
 
 ## 📦 Projects
 
