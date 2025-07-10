@@ -27,6 +27,12 @@ This repo contains the following project:
 
 A collection of controls that have been removed from **System.Windows.Forms**.
 
+Currently supports:
+- System.Windows.Forms.**ContextMenu**
+- System.Windows.Forms.**MainMenu**
+- System.Windows.Forms.**Menu**
+- System.Windows.Forms.**MenuItem**
+
 ## 🙌 Usage
 
 To use, simply install the required package from NuGet:
