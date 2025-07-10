@@ -28,7 +28,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 
 		<!-- Metadata -->
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 		<Description>A collection of controls that have been removed from System.Windows.Forms.</Description>
 		<Author>Simon Peckmore</Author>
 		<Copyright>Copyright © Simon Peckmore 2025</Copyright>
@@ -37,7 +37,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>NetEx.Legacy.WinForms</PackageId>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageProjectUrl>https://github.com/Peckmore/NetEx.Legacy</PackageProjectUrl>
+		<PackageProjectUrl>https://peckmore.github.io/NetEx.Legacy</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>Please refer to GitHub for changes.</PackageReleaseNotes>
 		<PackageTags>

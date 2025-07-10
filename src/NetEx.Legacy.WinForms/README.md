@@ -1,4 +1,4 @@
-# NetEx.Dialogs.WinForms
+# NetEx.Legacy.WinForms
 
 A collection of types and controls that have been removed from **System.Windows.Forms**.
 
