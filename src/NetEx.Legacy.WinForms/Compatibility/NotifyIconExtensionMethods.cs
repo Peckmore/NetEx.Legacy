@@ -38,7 +38,7 @@ namespace System.Windows.Forms
             contextMenu.OnPopup(EventArgs.Empty);
 
             SafeNativeMethods.TrackPopupMenuEx(new HandleRef(contextMenu, contextMenu.Handle),
-                NativeMethods.TPM_VERTICAL | NativeMethods.TPM_RIGHTALIGN,
+                NativeMethods.TPM_VERTICAL | NativeMethods.TPM_LEFTALIGN,
                 pos.X, //pt.x,
                 pos.Y, //pt.y,
                 new HandleRef(window, windowHandle),
