@@ -18,7 +18,7 @@ on:
       version:
         description: "Version number of the build"
         value: ${{ jobs.build.outputs.version }}
-        
+
   workflow_dispatch:
   
 env:
@@ -54,9 +54,9 @@ jobs:
       id: git-cliff
       with:
         config: cliff.toml
-        args: -vv --latest --strip header
+        args: -v --strip header
       env:
-        OUTPUT: CHANGES.md
+        OUTPUT: CHANGELOG.md
         GITHUB_REPO: ${{ github.repository }}
     
     # Set version number (for Release)
@@ -75,14 +75,14 @@ jobs:
       working-directory: src
 
     # Build the project
-    - name: Build
-      run: |
-        dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore /p:Version=${{ env.VERSION_NUMBER }}
-      working-directory: src
+    #- name: Build
+    #  run: |
+    #    dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore /p:Version=${{ env.VERSION_NUMBER }}
+    #  working-directory: src
 
     # Upload build artifacts
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: nupkg-files
-        path: src/**/*.nupkg
+    #- name: Upload Build Artifacts
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: nupkg-files
+    #    path: src/**/*.nupkg
