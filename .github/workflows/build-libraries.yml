@@ -29,12 +29,25 @@ jobs:
     # Checkout the repository
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     
     # Set up .NET environment
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+       
+    # Generate version number, changelog, and release notes from Conventional Commits
+    - name: Generate Changelog
+      uses: orhun/git-cliff-action@v4
+      id: git-cliff
+      with:
+        config: cliff.toml
+        args: -vv --latest --strip header
+      env:
+        OUTPUT: CHANGES.md
+        GITHUB_REPO: ${{ github.repository }}
     
     # Set version number (for Release)
     - name: Set Version Number
