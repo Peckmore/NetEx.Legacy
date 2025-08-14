@@ -30,8 +30,8 @@ jobs:
         files: ./**/*.nupkg
 
     # Publish the build packages to NuGet
-    - name: Publish to NuGet
-      run: dotnet nuget push "**/NetEx.*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+    # - name: Publish to NuGet
+    #  run: dotnet nuget push "**/NetEx.*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
   Documentation:
     needs: Publish
