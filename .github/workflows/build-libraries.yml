@@ -6,12 +6,19 @@ on:
       - main
     paths:
       - src/**
+
   push:
     branches:
       - main
     paths:
       - src/**
+
   workflow_call:
+    outputs:
+      version:
+        description: "Version number of the build"
+        value: ${{ jobs.build.outputs.version }}
+        
   workflow_dispatch:
   
 env:
@@ -23,6 +30,9 @@ jobs:
 
   Build:
     runs-on: windows-latest
+
+    outputs:
+      version: ${{ steps.git-cliff.outputs.version }}
 
     steps:
     

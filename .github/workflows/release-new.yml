@@ -17,6 +17,10 @@ jobs:
 
     steps:
         
+    # verion
+    - name: Show output from Build
+      run: "echo Output: ${{ needs.Build.outputs.version }}"
+
     # Download build artifacts
     - name: Download Build Artifacts
       uses: actions/download-artifact@v4
@@ -33,6 +37,6 @@ jobs:
     # - name: Publish to NuGet
     #  run: dotnet nuget push "**/NetEx.*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
-  Documentation:
-    needs: Publish
-    uses: ./.github/workflows/publish-documentation.yml
+  # Documentation:
+  #  needs: Publish
+  #  uses: ./.github/workflows/publish-documentation.yml
