@@ -1,0 +1,1 @@
+Fixed an issue with incorrect alignment of `ContextMenu` when shown from a `NotifyIcon`.
