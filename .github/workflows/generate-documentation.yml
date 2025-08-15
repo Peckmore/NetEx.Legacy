@@ -44,6 +44,11 @@ jobs:
       shell: pwsh
       run: Copy-Item  -Path .\README.md -Destination .\index.md
 
+    # Rename `CHANGELOG.md`.
+    - name: Rename `CHANGELOG.md`
+      shell: pwsh
+      run: Move-Item  -Path .\CHANGELOG.md -Destination .\changelog.md
+
     # Generate documentation.
     - name: Generate Documentation
       run: docfx docfx.json
