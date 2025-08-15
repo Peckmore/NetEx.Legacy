@@ -36,7 +36,7 @@ jobs:
       id: git-cliff
       with:
         config: cliff.toml
-        args: -v --latest --strip header
+        args: -vv --latest --strip header
       env:
         OUTPUT: CHANGELOG.md
         GITHUB_REPO: ${{ github.repository }}
@@ -79,7 +79,14 @@ jobs:
         tag_exists_error: true
         message: Latest release
 
+    # Delete build artifacts from the Validate step, ready for final artifacts from the Build step.
+    - uses: geekyeggo/delete-artifact@v1
+      with:
+        name: nupkg-files
+
   # Now do our build for real.
   Build:
     needs: Tag
     uses: ./.github/workflows/build-libraries.yml
+
+  # Finally, create the GitHub release using our changelog, version, tag, and build artifacts.

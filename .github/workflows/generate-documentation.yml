@@ -56,12 +56,10 @@ jobs:
 
     # Upload documentation artifacts.
     - name: Upload Documentation Artifacts
-      id: upload
       uses: actions/upload-pages-artifact@v3
       with:
         path: docs/_site/
 
     # Publish documentation to GitHub Pages.
     - name: Publish to GitHub Pages
-      id: publish
       uses: actions/deploy-pages@v4
