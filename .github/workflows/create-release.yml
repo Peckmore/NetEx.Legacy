@@ -1,3 +1,8 @@
+# This workflow is used to create a new release of NetEx.Legacy. It first does a validation build, to ensure that the code will build,
+# then uses the commit history (and Conventional Commits) to generate a changelog, update the version number in the source files and
+# commit the changes to source, then tag the commit. This final commit is then used to create the release versions of the libraries,
+# and a draft GitHub release is generated using the changelog, with the final compiled files attached.
+
 name: Create Release
 
 on:
@@ -8,24 +13,46 @@ env:
 
 jobs:
 
-  # Do a build first to verify the code is valid, and get our new version number.
+  # Do a build first to verify the code is valid.
   Validate:
     uses: ./.github/workflows/build-libraries.yml
 
-  # Now we know everything is valid, we'll update the version number in the source, and tag the latest commit.
+  # Now we know everything is valid, generate the changelog, update the version number, and tag the latest commit.
   Tag:
     runs-on: ubuntu-latest
     needs: Validate
 
     steps:
-
-    # Output the version number from the Validate job.
-    - name: Show Version Number
-      run: "echo Output: ${{ needs.Validate.outputs.version }}"
     
-    # Checkout the repository
+    # Checkout the repository.
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Generate version number, changelog, and release notes from Conventional Commits.
+    - name: Generate Changelog
+      uses: orhun/git-cliff-action@v4
+      id: git-cliff
+      with:
+        config: cliff.toml
+        args: -v --strip header
+      env:
+        OUTPUT: CHANGELOG.md
+        GITHUB_REPO: ${{ github.repository }}
+
+    # Commit the changelog.
+    - name: Commit Changelog
+      run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "chore: update changelog"
+        git push
+
+    # Output the new version number.
+    - name: Show Version Number
+      run: "echo Output: ${{ steps.git-cliff.outputs.version }}"
 
     # Set the version number in the source project files.
     - name: Set Version Number
@@ -33,7 +60,7 @@ jobs:
       with:
         file: |
           "**/*.csproj", "**/*.nuspec", "**/AssemblyInfo.cs"
-        version: ${{ needs.Validate.outputs.version }}
+        version: ${{ steps.git-cliff.outputs.version }}
 
     # Commit the changes ready for our production build.
     - name: Commit Version Number
@@ -48,7 +75,7 @@ jobs:
     - name: Tag Release Version
       uses: rickstaa/action-create-tag@v1
       with:
-        tag: v${{ needs.Validate.outputs.version }}
+        tag: v${{ steps.git-cliff.outputs.version }}
         tag_exists_error: true
         message: Latest release
 

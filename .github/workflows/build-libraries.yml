@@ -1,4 +1,7 @@
-﻿name: Build Libraries
+﻿# This workflow builds the NetEx.Legacy libraries, and uploads the generated NuGet package files as artifacts. The workflow is triggered
+# on pull requests and pushes to `main`, can be called from other workflows, or invoked manually.
+
+name: Build Libraries
 
 on:
   pull_request:
@@ -6,19 +9,12 @@ on:
       - main
     paths:
       - src/**
-
   push:
     branches:
       - main
     paths:
       - src/**
-
   workflow_call:
-    outputs:
-      version:
-        description: "Version number of the build"
-        value: ${{ jobs.build.outputs.version }}
-
   workflow_dispatch:
   
 env:
@@ -30,48 +26,32 @@ jobs:
   Build:
     runs-on: windows-latest
 
-    outputs:
-      version: ${{ steps.git-cliff.outputs.version }}
-
     steps:
     
-    # Checkout the repository
+    # Checkout the repository.
     - name: Checkout Code
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
     
-    # Set up .NET environment
+    # Set up .NET environment.
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-       
-    # Generate version number, changelog, and release notes from Conventional Commits
-    - name: Generate Changelog
-      uses: orhun/git-cliff-action@v4
-      id: git-cliff
-      with:
-        config: cliff.toml
-        args: -v --strip header
-      env:
-        OUTPUT: CHANGELOG.md
-        GITHUB_REPO: ${{ github.repository }}
 
-    # Restore dependencies
+    # Restore dependencies.
     - name: Restore Dependencies
       run: dotnet restore
       working-directory: src
 
-    # Build the project
-    #- name: Build
-    #  run: |
-    #    dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
-    #  working-directory: src
+    # Build the project.
+    - name: Build
+      run: |
+        dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
+      working-directory: src
 
-    # Upload build artifacts
-    #- name: Upload Build Artifacts
-    #  uses: actions/upload-artifact@v4
-    #  with:
-    #    name: nupkg-files
-    #    path: src/**/*.nupkg
+    # Upload build artifacts.
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nupkg-files
+        path: src/**/*.nupkg

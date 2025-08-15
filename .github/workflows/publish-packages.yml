@@ -1,3 +1,6 @@
+# This workflow will publish the NuGet packages of the latest GitHub release to Nuget. It is triggered when a release is published, or
+# can be manually invoked.
+
 name: Create Release
 
 on:
@@ -15,12 +18,12 @@ jobs:
 
     steps:
 
-    # Download build artifacts
+    # Download build artifacts.
     - name: Download Build Artifacts
       uses: actions/download-artifact@v4
       with:
         name: nupkg-files
 
-    # Publish the build packages to NuGet
+    # Publish the build packages to NuGet.
     #- name: Publish to NuGet
     #  run: dotnet nuget push "**/NetEx.*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
