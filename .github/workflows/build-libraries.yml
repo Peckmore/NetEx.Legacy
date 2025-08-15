@@ -58,16 +58,6 @@ jobs:
       env:
         OUTPUT: CHANGELOG.md
         GITHUB_REPO: ${{ github.repository }}
-    
-    # Set version number (for Release)
-    - name: Set Version Number
-      if: github.event_name == 'release'
-      run: |
-        Write-Host "GitHub Ref Name: ${{ github.ref_name }}"
-        $tag = "${{ github.ref_name }}"
-        $version = $tag -replace '^v', ''
-        "VERSION_NUMBER=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        Write-Host "Version set to: $version"
 
     # Restore dependencies
     - name: Restore Dependencies
