@@ -45,11 +45,12 @@ jobs:
 
   # Now do our build for real.
   Build:
+    needs: Tag
     uses: ./.github/workflows/build-libraries.yml
 
   Publish:
     runs-on: windows-latest
-    needs: Build
+    needs: [Validate, Build]
 
     steps:
 
@@ -66,8 +67,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: v${{ needs.Validate.outputs.version }}
+        release_name: v${{ needs.Validate.outputs.version }}
         body: |
           Changes in this Release
           - First Change
