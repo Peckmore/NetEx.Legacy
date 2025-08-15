@@ -1,7 +1,7 @@
 # This workflow will publish the NuGet packages of the latest GitHub release to Nuget. It is triggered when a release is published, or
 # can be manually invoked.
 
-name: Create Release
+name: Publish Packages
 
 on:
   release:
