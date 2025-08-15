@@ -53,6 +53,7 @@ jobs:
     
     # Set the version number
     - name: Set Version Number
+      shell: pwsh
       run: |
         Write-Host "Raw Version: ${{ steps.git-cliff.outputs.version }}"
         $rawVersion = "${{ steps.git-cliff.outputs.version }}"
