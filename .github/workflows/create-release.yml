@@ -60,7 +60,7 @@ jobs:
         $rawVersion = "${{ steps.git-cliff.outputs.version }}"
         $version = $rawVersion -replace 'v', ''
         "VERSION_NUMBER=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        Write-Host "Version set to: v${{ env.VERSION_NUMBER }}"
+        Write-Host "Version set to: v$version"
 
     # Set the version number in the source project files.
     - name: Set Version Number
