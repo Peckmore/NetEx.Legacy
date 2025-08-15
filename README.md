@@ -4,7 +4,7 @@
 
 # NetEx.Legacy
 
-This repo is a collection of types and controls that have been removed from .NET, ported to work with newer runtime versions. :relaxed:
+A collection of types and controls that have been removed from .NET, ported to work with newer runtime versions. :relaxed:
 
 </div>
 
@@ -51,6 +51,8 @@ Full API documentation can be found [here](https://peckmore.github.io/NetEx.Lega
 ## 🚀 Releases
 
 A full list of all releases is available on the [Releases](https://github.com/Peckmore/NetEx.Legacy/releases) tab on GitHub.
+
+A complete changelog can also be found [here](https://github.com/Peckmore/NetEx.Legacy/blob/main/CHANGELOG.md).
 
 ## 🔢 Versioning
 

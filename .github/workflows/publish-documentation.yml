@@ -40,6 +40,11 @@ jobs:
       shell: pwsh
       run: Copy-Item  -Path .\README.md -Destination .\index.md
 
+    # Copy changelog
+    - name: Copy changelog
+      shell: pwsh
+      run: Copy-Item  -Path .\CHANGELOG.md -Destination .\changelog.md
+
     # Generate documentation
     - name: Generate Documentation
       run: docfx docfx.json
