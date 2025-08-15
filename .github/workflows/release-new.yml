@@ -14,7 +14,7 @@ jobs:
 
   # Now we know everything is valid, we'll update the version number in the source, and tag the latest commit.
   Tag:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: Validate
 
     steps:
@@ -58,7 +58,7 @@ jobs:
     uses: ./.github/workflows/build-libraries.yml
 
   Publish:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: [Validate, Build]
 
     steps:
