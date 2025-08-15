@@ -13,7 +13,7 @@ env:
 
 jobs:
 
-  Publish:
+  Generate:
     runs-on: windows-latest
     permissions:
       contents: write
