@@ -24,7 +24,6 @@ on:
 env:
   BUILD_CONFIGURATION: Release
   DOTNET_VERSION: 9.0.x
-  VERSION_NUMBER: 0
 
 jobs:
 
@@ -67,7 +66,7 @@ jobs:
     # Build the project
     #- name: Build
     #  run: |
-    #    dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore /p:Version=${{ env.VERSION_NUMBER }}
+    #    dotnet build NetEx.Legacy.WinForms/NetEx.Legacy.WinForms.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
     #  working-directory: src
 
     # Upload build artifacts
