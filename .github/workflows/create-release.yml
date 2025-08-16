@@ -22,6 +22,8 @@ jobs:
   Tag:
     runs-on: ubuntu-latest
     needs: Validate
+    permissions:
+      actions: write
 
     steps:
 
