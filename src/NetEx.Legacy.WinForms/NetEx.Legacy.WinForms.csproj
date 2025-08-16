@@ -28,7 +28,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 
 		<!-- Metadata -->
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 		<Description>A collection of controls that have been removed from System.Windows.Forms.</Description>
 		<Author>Simon Peckmore</Author>
 		<Copyright>Copyright © Simon Peckmore 2025</Copyright>
