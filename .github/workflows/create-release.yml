@@ -22,20 +22,12 @@ jobs:
   Tag:
     runs-on: ubuntu-latest
     needs: Validate
-    permissions:
-      actions: write
 
     steps:
 
     # Configure Git to use GitHub Actions bot as committer.
     - name: Configure Git Actions Bot
       uses: drengskapur/gitbot-config@00aecab0a790b146951f9e0c48f564eaf26a9df6 # v1.1.2
-
-    # Delete build artifacts from the Validate step, ready for final artifacts from the Build step.
-    - name: Cleanup Build Artifacts
-      uses: geekyeggo/delete-artifact@v4
-      with:
-        name: nupkg-files
 
     # Checkout the repository.
     - name: Checkout Code
@@ -103,6 +95,12 @@ jobs:
         tag: v${{ env.VERSION_NUMBER }}
         tag_exists_error: true
         message: Latest release
+
+    # Delete build artifacts from the Validate step, ready for final artifacts from the Build step.
+    - name: Cleanup Build Artifacts
+      uses: geekyeggo/delete-artifact@v4
+      with:
+        name: nupkg-files
 
   # Now do our build for real.
   Build:
