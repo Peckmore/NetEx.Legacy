@@ -33,7 +33,7 @@ jobs:
 
     # Delete build artifacts from the Validate step, ready for final artifacts from the Build step.
     - name: Cleanup Build Artifacts
-      uses: geekyeggo/delete-artifact@v1
+      uses: geekyeggo/delete-artifact@v4
       with:
         name: nupkg-files
 
