@@ -1,13 +1,4 @@
 
-## [unreleased]
-
-
-### ⚙️ Miscellaneous Tasks
-
-- Update changelog
-- Update version to null
-
-
 ## [null] - 2025-08-16
 
 Latest release
@@ -44,14 +35,4 @@ Latest release
 - Update version to null
 - Update changelog
 - Update version to null
-
-
-## [0.0.1] - 2025-07-10
-
-Initial alpha release. This version supports:
-
-- System.Windows.Forms.**ContextMenu**
-- System.Windows.Forms.**MainMenu**
-- System.Windows.Forms.**Menu**
-- System.Windows.Forms.**MenuItem**
 
