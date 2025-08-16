@@ -41,7 +41,7 @@ jobs:
       id: git-cliff
       with:
         config: cliff.toml
-        args: -vv --strip header
+        args: -v --latest --strip header
       env:
         OUTPUT: CHANGELOG.md
         GITHUB_REPO: ${{ github.repository }}
@@ -53,16 +53,23 @@ jobs:
         git commit -m "chore: update changelog"
         git push
     
-    # Get the version number
+    # Get the version number. We parse the output from `git-cliff` to remove the leading "v" from the version string.
     - name: Get Version Number
       shell: pwsh
       run: |
+        # Get the raw version number from the git-cliff output.
         Write-Host "Raw Version: ${{ steps.git-cliff.outputs.version }}"
         $rawVersion = "${{ steps.git-cliff.outputs.version }}"
+
+        # If the version is null, throw an error.
         if ("null" -eq $rawVersion) {
           throw "Version is '$rawVersion'!"
         }
+
+        # Remove the leading "v" from the version string.
         $version = $rawVersion -replace 'v', ''
+
+        # Set the version number as an environment variable for later steps.
         "VERSION_NUMBER=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         Write-Host "Version set to: v$version"
 
