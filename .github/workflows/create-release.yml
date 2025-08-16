@@ -55,7 +55,7 @@ jobs:
         $rawVersion = "${{ steps.git-cliff.outputs.version }}"
 
         # If the version is null, throw an error.
-        if ("null" -eq $rawVersion) {
+        if ($rawVersion -like "*null") {
           throw "Version is '$rawVersion'!"
         }
 
