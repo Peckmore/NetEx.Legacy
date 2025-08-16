@@ -45,13 +45,6 @@ jobs:
       env:
         OUTPUT: CHANGELOG.md
         GITHUB_REPO: ${{ github.repository }}
-
-    # Commit the changelog.
-    - name: Commit Changelog
-      run: |
-        git add .
-        git commit -m "chore: update changelog"
-        git push
     
     # Get the version number. We parse the output from `git-cliff` to remove the leading "v" from the version string.
     - name: Get Version Number
@@ -72,6 +65,13 @@ jobs:
         # Set the version number as an environment variable for later steps.
         "VERSION_NUMBER=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         Write-Host "Version set to: v$version"
+
+    # Commit the changelog.
+    - name: Commit Changelog
+      run: |
+        git add .
+        git commit -m "chore: update changelog"
+        git push
 
     # Set the version number in the source project files.
     - name: Set Version Number
