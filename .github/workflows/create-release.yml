@@ -59,7 +59,7 @@ jobs:
       run: |
         Write-Host "Raw Version: ${{ steps.git-cliff.outputs.version }}"
         $rawVersion = "${{ steps.git-cliff.outputs.version }}"
-        if ($null -eq $rawVersion) {
+        if ("null" -eq $rawVersion) {
           throw "Version is '$rawVersion'!"
         }
         $version = $rawVersion -replace 'v', ''
